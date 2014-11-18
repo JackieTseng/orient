@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff" >
+
+    <RelativeLayout
+        android:id="@+id/group"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        
+        <com.orient.RefreshableView  
+            android:id="@+id/refreshable_view"  
+            android:layout_width="fill_parent"  
+            android:layout_height="fill_parent">
+            <ListView
+                android:id="@+id/home_listView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:descendantFocusability="afterDescendants" >
+
+            </ListView>
+         </com.orient.RefreshableView>  
+            
+        <ImageButton
+            android:id="@+id/create_imageButton"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:scaleType="centerCrop"
+            android:background="#00000000"
+            android:src="@drawable/creat"/>
+            
+        </RelativeLayout>
+
+</RelativeLayout>

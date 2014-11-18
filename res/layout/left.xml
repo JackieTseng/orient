@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mlist"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_color_deep" >
+
+    <RelativeLayout
+        android:layout_width="180dp"
+        android:layout_height="fill_parent"
+        android:background="@color/bg_color_deep">
+
+        <ImageView
+            android:id="@+id/foot"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/foot" />
+
+        <RelativeLayout 
+            android:id="@+id/home"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:padding="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/foot">
+            
+            <ImageView
+                android:id="@+id/home_pic"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true" 
+                android:layout_marginRight="10dp"
+                android:src="@drawable/home"
+                android:contentDescription="@string/app_name" />
+
+            <Button
+                android:id="@+id/home_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="#00000000"
+                android:text="Home 主页"
+                android:textColor="#76ad35"
+                android:textSize="15sp"
+                android:layout_toRightOf="@+id/home_pic" />
+        </RelativeLayout>
+        
+        <include
+            android:id="@+id/line1"
+            android:layout_below="@+id/home"
+            android:layout_alignParentLeft="true"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            layout="@layout/line" >
+        </include>
+        
+        <RelativeLayout 
+            android:id="@+id/friend"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:padding="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/line1">
+            
+            <ImageView
+                android:id="@+id/friend_pic"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/friend"
+                android:contentDescription="@string/app_name" />
+
+            <Button
+                android:id="@+id/friend_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="#00000000"
+                android:text="Friend 好友"
+                android:textColor="#76ad35"
+                android:textSize="15sp"
+                android:layout_toRightOf="@+id/friend_pic" />
+        </RelativeLayout>
+        
+        <include
+            android:id="@+id/line2"
+            android:layout_below="@+id/friend"
+            android:layout_centerHorizontal="true"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            layout="@layout/line" >
+        </include>
+
+        <RelativeLayout 
+            android:id="@+id/history"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:padding="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/line2">
+            
+            <ImageView
+                android:id="@+id/history_pic"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/startroom"
+                android:contentDescription="@string/app_name" />
+
+            <Button
+                android:id="@+id/history_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="#00000000"
+                android:text="History 历史"
+                android:textColor="#76ad35"
+                android:textSize="15sp"
+                android:layout_toRightOf="@+id/history_pic" />
+        </RelativeLayout>
+        
+        <include
+            android:id="@+id/line3"
+            android:layout_below="@+id/history"
+            android:layout_centerHorizontal="true"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            layout="@layout/line" >
+        </include>
+        
+        <RelativeLayout 
+            android:id="@+id/setting"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:padding="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/line3">
+            
+            <ImageView
+                android:id="@+id/setting_pic"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/setting"
+                android:contentDescription="@string/app_name" />
+
+            <Button
+                android:id="@+id/setting_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="#00000000"
+                android:text="Setting 设置"
+                android:textColor="#76ad35"
+                android:textSize="15sp"
+                android:layout_toRightOf="@+id/setting_pic" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    
+</ScrollView>
