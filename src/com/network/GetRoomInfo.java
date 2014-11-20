@@ -19,7 +19,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Parcelable;
 import android.util.Log;
-
 public class GetRoomInfo extends BaseNetwork{
 	private int roomid;
 	public GetRoomInfo(HttpClient pClient, Handler pHandler, int pRoomId) {

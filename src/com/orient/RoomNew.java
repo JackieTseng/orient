@@ -30,6 +30,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -166,7 +167,6 @@ public class RoomNew extends Activity {
 			new Thread(gri).start();
 		}
 		else if(gva.curRoomId == intent.getIntExtra("RoomId",-1)){//进入已经加入的房间
-			Log.i("yuan", "in this room");
 			GetRoomInfo gri = new GetRoomInfo(gva.httpClient, getRoomInfoHandler, gva.curRoomId);
 			new Thread(gri).start();
 			//GetRoute gr = new GetRoute(gva.httpClient, getRouteHandler, routeid);
@@ -178,7 +178,6 @@ public class RoomNew extends Activity {
 		otherTeams.clear();
 		if(gva.curRoomId == room.getRoomid()){
 			for (int i = 0; i < teamList.size(); i++) {
-				Log.i("yuan", String.valueOf(gva.teamid));
 				if (teamList.get(i).getTeamid() == 0) {
 					notchosen = teamList.get(i);
 				} else if (teamList.get(i).getTeamid()!=gva.teamid)
@@ -277,15 +276,24 @@ public class RoomNew extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent();
-				intent.setClass(RoomNew.this, GameMap.class);
-				//传递参数
-
-				Bundle bundle = new Bundle();
-				bundle.putParcelable("com.util.Room", room);
-				intent.putExtras(bundle);
-				startActivity(intent);
-				finish();
+				if (gva.curRoomId != room.getRoomid()) {
+					Toast.makeText(getApplicationContext(), "你尚未加入该房间", Toast.LENGTH_SHORT);
+				} else if (gva.teamid == 0) {
+					Toast.makeText(getApplicationContext(), "你尚未加入队伍", Toast.LENGTH_SHORT);
+				} else {
+					Intent intent = new Intent();
+					intent.setClass(RoomNew.this, GameMap.class);
+					Bundle bundle = new Bundle();
+					bundle.putParcelable("Room", room);
+					for (TeamParcelable team : teamList) {
+						if (team.getTeamid() == gva.teamid) {
+							bundle.putParcelable("Team", team);
+						}
+					}
+					intent.putExtras(bundle);
+					startActivity(intent);
+					finish();
+				}
 			}
 		});
        	
@@ -547,17 +555,14 @@ public class RoomNew extends Activity {
 	private Handler changeToTeamHandler = new Handler(){
     	@Override
 	 	public void handleMessage(android.os.Message msg){
-    		Log.i("yuan", "in changeToTeamHandler");
     		Bundle bundle = msg.getData();
 	    	String status = bundle.getString("status", "no status");
 	    	String info = bundle.getString("info", "no info");
 	    	if (status.equalsIgnoreCase("succeed")){
-	    		Log.i("yuan", "changeToTeam succeed");
 	    		gva.teamid = Integer.parseInt(bundle.getString("TeamId", String.valueOf(-1)));
 	    		Toast.makeText(getApplicationContext(), "成功选择队伍", Toast.LENGTH_SHORT).show();
 	    		refresh();
 	    	}else if (status.equalsIgnoreCase("failed")){
-	    		Log.i("yuan", "changeToTeam failed");
 	    		if (info.equalsIgnoreCase("not login")){
 	    			Toast.makeText(getApplicationContext(), "尚未登录", Toast.LENGTH_SHORT).show();
 	    		} else if (info.equalsIgnoreCase("not in any room")) {
@@ -576,13 +581,11 @@ public class RoomNew extends Activity {
 	    			Toast.makeText(getApplicationContext(), "修改失败", Toast.LENGTH_SHORT).show();
 	    		}
 	    	} else {
-	    		Log.i("yuan", "changeToTeam 未知错误");
 	    		Toast.makeText(getApplicationContext(), "未知错误", Toast.LENGTH_SHORT).show();
 	    	}
     	}
     };
 	private void updateMyTeam(){
-		Log.i("yuan", "gva.teamid -----> " + gva.teamid);
 		if (gva.curRoomId != room.getRoomid() || gva.teamid == 0){ //不在这个房间里面 或者 还没有选择队伍
 			myteam_ll.setVisibility(View.GONE);
 			return;

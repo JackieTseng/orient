@@ -48,7 +48,7 @@ public class PageFragment1 extends Fragment {
     private List<Room> rooms;
     GlobalVarApplication gva;
     ImageButton createRoomImageButton;
-
+    private TextView addrname;
 	//下拉刷新列表
     RefreshableView refreshableView;
     Location location;
@@ -57,6 +57,7 @@ public class PageFragment1 extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        addrname = (TextView)this.getActivity().findViewById(R.id.addr_name);
     }
     
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -80,7 +81,7 @@ public class PageFragment1 extends Fragment {
             public void onRefresh() {
                 location.positioning(getActivity(), positioningHandler, gva.getMyLocationListener(), false);
                 try {  
-                    Thread.sleep(3000);  
+                    Thread.sleep(5000);  
                 } catch (InterruptedException e) {  
                     e.printStackTrace();  
                 }  
@@ -157,10 +158,14 @@ public class PageFragment1 extends Fragment {
                     locData.latitude = bundle.getDouble("latitude");  
                     locData.longitude =  bundle.getDouble("longitude");
                     locData.direction = bundle.getFloat("direction");
-                    
+                    String addr = bundle.getString("address");
+                    gva.address = addr;
                     Log.i("lin", "get location succeed");
                     Log.i("lin", "longitude: "+locData.longitude+" latitude: "+locData.latitude);
-                    Log.i("lin", "address: "+bundle.getString("address"));
+                    Log.i("lin", "address: "+addr);
+                    //View mView = thisinflater.inflate(R.layout.view_pager, null);
+                    
+                    addrname.setText(gva.address);
                     uploadPosition((int)(locData.longitude*1e6), (int)(locData.latitude*1e6));
                 }else {
                     Toast.makeText(getActivity(), "努力定位ing...", 2000).show();
@@ -265,20 +270,8 @@ public class PageFragment1 extends Fragment {
                    long arg3) {
                // TODO Auto-generated method stub
 
-               Intent intent = new Intent();
-               Bundle bundle = new Bundle();
-               bundle.putParcelable("com.util.Room", rooms.get(arg2));
-               intent.putExtras(bundle);
-               /*TextView roomNameTextView = (TextView)arg1.findViewById(R.id.home_item_roomname);
-               intent.putExtra("roomName", roomNameTextView.getText().toString());
-               TextView pointTextView = (TextView)arg1.findViewById(R.id.home_item_point);
-               intent.putExtra("point", pointTextView.getText().toString());
-               TextView timeTextView = (TextView)arg1.findViewById(R.id.home_item_time);
-               intent.putExtra("time", timeTextView.getText().toString());
-               String roomid = ((TextView)arg1.findViewById(R.id.roomid)).getText().toString();
-               intent.putExtra("roomid", roomid);
-               String maxMem = ((TextView) arg1.findViewById(R.id.home_item_number)).getText().toString();
-               intent.putExtra("maxMem", maxMem);*/
+        	   Intent intent = new Intent();
+        	   intent.putExtra("RoomId", rooms.get(arg2).getRoomid());
                intent.setClass(getActivity(), RoomNew.class);
                startActivity(intent);
                getActivity().finish();

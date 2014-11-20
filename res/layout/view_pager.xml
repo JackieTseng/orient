@@ -92,7 +92,7 @@
             android:layout_height="25dp"
             android:layout_alignParentBottom="true"
             android:layout_toLeftOf="@+id/time"
-            android:src="@drawable/join" />
+            android:src="@drawable/location" />
         
     </RelativeLayout>
 

@@ -47,6 +47,26 @@ public class Login extends BaseNetwork{
 					bundle.putString("RoomId", parser.nextText());
 				}else if (tag.equalsIgnoreCase("TeamId")){
 					bundle.putString("TeamId", parser.nextText());
+				}else if (tag.equalsIgnoreCase("userinfo")) {
+					parseEvent = parser.next();
+					while (!(parseEvent == XmlPullParser.END_TAG && parser.getName().equalsIgnoreCase("userinfo"))){
+						switch(parseEvent){
+						case XmlPullParser.START_TAG:
+							tag = parser.getName();
+							if (tag.equalsIgnoreCase("nickname"))
+								bundle.putString("nickname", parser.nextText());
+							else if (tag.equalsIgnoreCase("gender"))
+								bundle.putString("telephone", parser.nextText());
+							else if (tag.equalsIgnoreCase("telephone"))
+								bundle.putString("telephone", parser.nextText());
+							else if (tag.equalsIgnoreCase("portrait"))
+								bundle.putString("portrait", parser.nextText());
+							break;
+						default:
+							break;
+						}
+						parseEvent = parser.next();
+					}
 				}
 				break;
 			}

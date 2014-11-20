@@ -67,7 +67,6 @@ public class GameMissionOverlay extends ItemizedOverlay<OverlayItem> {
 					GameMap.context.mHandler.sendMessage(msg);
 						if(GameMap.context.missionnum==0){
 							
-							System.out.println("哈哈哈哈哈哈哈哈哈哈哈哈");
 							new AlertDialog.Builder(GameMap.context).setMessage("闯关完成！").setNegativeButton("确定", new DialogInterface.OnClickListener() {
 								
 								@Override

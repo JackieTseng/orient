@@ -4,6 +4,8 @@ import com.orient.widget.MultiDirectionSlidingDrawer;
 import com.orient.R;
 import com.util.Location;
 import com.util.Room;
+import com.util.TeamMemberParcelable;
+import com.util.TeamParcelable;
 
 import java.util.Date;
 import java.util.ArrayList;
@@ -20,12 +22,14 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.MyLocationOverlay;
 import com.baidu.mapapi.map.OverlayItem;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
+import com.constant.Constant;
 
 import android.R.bool;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -55,6 +59,7 @@ public class GameMap extends Activity implements Runnable{
 	MapView mMapView = null;
 	MapController mMapController=null;
 	MyLocationOverlay myposOverlay;
+	TeamMateOverlay teammateOverlay;
 	Handler handler;
 	GameMissionOverlay missionOverlay;
 	GameMissionOverlay gettogetherOverlay;
@@ -70,6 +75,7 @@ public class GameMap extends Activity implements Runnable{
 	private Menu mainMenu;
 	int missionnum;
 	ArrayList<GeoPoint> missionList;
+	ArrayList<GeoPoint> teammateList;
 	GeoPoint myposGeoPoint;
 	//下拉列表
 	MultiDirectionSlidingDrawer mDrawer;
@@ -87,7 +93,6 @@ public class GameMap extends Activity implements Runnable{
     //private int iCount = 0;
     public TextView process;
     
-  //椹块┈蹇姤
     LinearLayout curmesLayout;
 	LinearLayout curmesItemLayout;
 	Button exit_btn;
@@ -101,6 +106,9 @@ public class GameMap extends Activity implements Runnable{
     //璇煶
     private Button soundButton;
     private RelativeLayout soundLayout;
+    private SharedPreferences sharedPreferences;
+    private String username;
+    TeamParcelable team;
     Location location = new Location();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -112,10 +120,13 @@ public class GameMap extends Activity implements Runnable{
 		mBMapMan=gva.getBMapManager();
 		setContentView(R.layout.game);
 		points = gva.points;
+		sharedPreferences = getSharedPreferences(Constant.USER_SHAREDPREFERENCE, MODE_PRIVATE);
+		username = sharedPreferences.getString(Constant.SHAREDPREFERENCE_KEY_USERNAME, "");
 		
 		//传递房间参数
 		Intent intent = getIntent();
-		room = (Room)intent.getParcelableExtra("com.util.Room");
+		room = (Room)intent.getParcelableExtra("Room");
+		team = intent.getParcelableExtra("Team");
 		if (room == null) {
 			System.out.println("room is null");
 			room = new Room();
@@ -139,6 +150,10 @@ public class GameMap extends Activity implements Runnable{
 		
 		getlocationbtn = (ImageButton)findViewById(R.id.getlocationbtn);
 		
+		mark = getResources().getDrawable(R.drawable.pinred);
+		teammateOverlay = new TeamMateOverlay(mark, mMapView);
+		mMapView.getOverlays().add(teammateOverlay);
+		
 		mark = getResources().getDrawable(R.drawable.pinmiddleblue);
 		gettogetherOverlay = new GameMissionOverlay(mark, mMapView);
 		mMapView.getOverlays().add(gettogetherOverlay);
@@ -152,7 +167,20 @@ public class GameMap extends Activity implements Runnable{
 		
 		for(int i = 0; i<points.size();++i){
 			missionList.add(new GeoPoint(points.get(i).get("latitude"),points.get(i).get("longitude")));
-			Log.i("yuan","for i--->"+points.get(i).get("latitude")+"   "+points.get(i).get("longitude"));
+		}
+		
+		teammateList = new ArrayList<GeoPoint>();
+		
+		if (team.getTeamid() == gva.teamid) {
+			for (TeamMemberParcelable teamMember : team.getTeamMemberList()) {
+				if (!teamMember.getUserid().equals(username)) {
+					teammateList.add(new GeoPoint(teamMember.getLocation().getLatitude(), teamMember.getLocation().getLongitude()));
+				}
+			}
+		}
+		
+		for(int i = 0; i<points.size();++i){
+			missionList.add(new GeoPoint(points.get(i).get("latitude"),points.get(i).get("longitude")));
 		}
 /*		mLocationClient = new LocationClient(getApplicationContext());     //声明LocationClient类
 		mLocationClient.setAK("90ehkP9tBULpKYG8rbwXffjG");
@@ -444,6 +472,9 @@ public class GameMap extends Activity implements Runnable{
 				gettogetherOverlay.addItem(new OverlayItem(missionList.get(i),"gettogetherpos", "gettogetherpos"));
 				Log.i("cab", "gettoge  i: "+i+" la "+missionList.get(i).getLatitudeE6()+" lo "+missionList.get(i).getLongitudeE6());
 			}
+		}
+		for (GeoPoint p : teammateList) {
+			teammateOverlay.addItem(new OverlayItem(p, "teammate", "teammate"));
 		}
 		
 //		if(missionList.size()!=0){

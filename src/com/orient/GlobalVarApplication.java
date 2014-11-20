@@ -24,9 +24,15 @@ import android.widget.Toast;
 
 public class GlobalVarApplication extends Application{
 	public HttpClient httpClient = null;
+	public boolean clientLock = false;
 	public static int playRouteId = -1;
 	public static int curRoomId = -1;
 	public static int teamid = -1;
+	public String address = "";
+	public String nickname = "";
+	public String gender = "";
+	public String telephone = "";
+	public int portrait = 0;
 	public static ArrayList<HashMap<String,Integer>> points;
 	public Context context = null;
 	public Handler getRemoteIdHandler;
@@ -35,6 +41,7 @@ public class GlobalVarApplication extends Application{
 	private static MyLocationListener mll = null;
 	//private static LocationClient locationClient= null;
 	public setRouteOverlay uploadRoute = null;
+	private LocationClient mlc = null;
 	@Override
 	public void onCreate() {
 		context = this;
@@ -43,6 +50,8 @@ public class GlobalVarApplication extends Application{
 		mBMapMan = new BMapManager(getApplicationContext());
 		mBMapMan.init("Kbe7fy7M05PhdOboeeRkkibv", null);
 		mll = new MyLocationListener();
+		mlc = new LocationClient(context);     //声明LocationClient类
+		mlc.setAK("90ehkP9tBULpKYG8rbwXffjG");
 		super.onCreate();
 	}
 	
@@ -50,15 +59,29 @@ public class GlobalVarApplication extends Application{
 		return msi;
 	}
 	public BMapManager getBMapManager(){
+		if(mBMapMan == null){
+			mBMapMan = new BMapManager(getApplicationContext());
+			mBMapMan.init("Kbe7fy7M05PhdOboeeRkkibv", null);
+		}
 		return mBMapMan;
 	}
 	/*public LocationClient getLocationClient(){
 		return locationClient;
 	}*/
 	public MyLocationListener getMyLocationListener(){
+		if(mll == null)
+			mll = new MyLocationListener();
 		return mll;
 	}
-
+	
+	public LocationClient getMyLocationClient(){
+		if(mlc == null){
+			mlc = new LocationClient(context);     //声明LocationClient类
+			mlc.setAK("90ehkP9tBULpKYG8rbwXffjG");
+		}
+		return mlc;
+	}
+	
 	@Override
 	public void onTerminate() {
 		mBMapMan.destroy();

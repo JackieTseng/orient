@@ -49,11 +49,17 @@ public class LoginActivity extends Activity {
 		@Override
 		public void handleMessage(Message msg){
 			dialog.cancel();
+			gva = (GlobalVarApplication)getApplication();
 			Bundle bundle = msg.getData();
 			String status = bundle.getString("status", "no status");
 			String info = bundle.getString("info", "no info");
 			String roomid = bundle.getString("RoomId", "no room id");
 			String teamid = bundle.getString("TeamId", "no team id");
+			
+			String nickname = bundle.getString("nickname", "no nickname");
+			String gender = bundle.getString("gender", "no gender");
+			String telephone = bundle.getString("telephone", "no telephone");
+			int portrait = Integer.valueOf(bundle.getString("portrait", "0"));
 			switch(msg.what){
 			case Constant.NETWORK_SUCCESS_MESSAGE_TAG:
 				
@@ -61,6 +67,10 @@ public class LoginActivity extends Activity {
 					Editor editor = sharePreferences.edit();
 					editor.putString(Constant.SHAREDPREFERENCE_KEY_USERNAME, userName);
 					editor.putString(Constant.SHAREDPREFERENCE_KEY_PASSWORD, pw);
+					gva.nickname = nickname;
+					gva.gender = gender;
+					gva.telephone = telephone;
+					gva.portrait = portrait;
 					editor.commit();
 					Toast.makeText(context, "登录成功", 
 							Toast.LENGTH_SHORT).show();
@@ -128,8 +138,7 @@ public class LoginActivity extends Activity {
 		registerButton = (TextView)findViewById(R.id.register);
 		userNameEt = (EditText)findViewById(R.id.username);
 		pwEt = (EditText)findViewById(R.id.password);
-		sharePreferences = getSharedPreferences(
-				Constant.USER_SHAREDPREFERENCE, MODE_PRIVATE);
+		sharePreferences = getSharedPreferences(Constant.USER_SHAREDPREFERENCE, MODE_PRIVATE);
 		userName = sharePreferences.getString(Constant.SHAREDPREFERENCE_KEY_USERNAME, "");
 		pw = sharePreferences.getString(Constant.SHAREDPREFERENCE_KEY_PASSWORD, "");
 		userNameEt.setText(userName);

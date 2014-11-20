@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
+import com.orient.GlobalVarApplication;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -28,16 +27,17 @@ public abstract class BaseNetwork implements Runnable{
 	protected HttpClient client;
 	protected List<NameValuePair> paramsList;
 	protected Handler handler;
-	
+	GlobalVarApplication gva; 
 	public BaseNetwork(HttpClient pClient, Handler pHandler, String tailUrl){
 		client = pClient;
 		handler = pHandler;
 		url = Constant.URL+tailUrl;
 		paramsList = new ArrayList<NameValuePair>();
+		
 	}
-	public BaseNetwork(HttpClient pClient, String tailUrl){
-		this(pClient, new Handler(), tailUrl);
-	}
+//	public BaseNetwork(HttpClient pClient, String tailUrl){
+//		this(pClient, new Handler(), tailUrl);
+//	}
 	abstract void setParamsList();
 
 	@Override
@@ -52,7 +52,7 @@ public abstract class BaseNetwork implements Runnable{
             
             if (response.getStatusLine().getStatusCode() == 200){
                 xml = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
-                Log.i("yuan", xml);
+                Log.i("lin", xml);
                 Message msg = new Message();
                 //msg.obj = parseXML(xml);
                 msg.setData(parseXML(xml));

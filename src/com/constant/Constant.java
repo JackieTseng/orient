@@ -9,5 +9,8 @@ public class Constant {
 	public static final String USER_SHAREDPREFERENCE = "userInformation";
 	public static final String SHAREDPREFERENCE_KEY_USERNAME = "username";
 	public static final String SHAREDPREFERENCE_KEY_PASSWORD = "password"; 
-	
+	public static final String SHAREDPREFERENCE_KEY_NICKNAME = "nickname";
+	public static final String SHAREDPREFERENCE_KEY_GENDER = "gender";
+	public static final String SHAREDPREFERENCE_KEY_TELEPHONE = "telephone";
+	public static final String SHAREDPREFERENCE_KEY_PORTRAIT = "portrait";
 }

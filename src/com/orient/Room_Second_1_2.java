@@ -127,17 +127,15 @@ public class Room_Second_1_2 extends Activity {
 			switch(msg.what){
 			case Constant.NETWORK_SUCCESS_MESSAGE_TAG:
 				if (status.equalsIgnoreCase("succeed")){
-					Log.i("lin", "room id: "+roomid);
 					gva.curRoomId = Integer.parseInt(roomid);
-					Log.i("lin", "cur room id: "+gva.curRoomId);
 					gva.teamid = 0;
 					Toast.makeText(context, "成功上传", Toast.LENGTH_LONG).show();
 					Intent backIntent = new Intent();
 					backIntent.setClass(Room_Second_1_2.this, HomeActivity.class);
-					Bundle locbundle = new Bundle();
-					bundle.putParcelable("com.util.Room", room);
-					bundle.putParcelable("com.orient.setRouteOverlay", gettogetherOverlay);
-					backIntent.putExtras(locbundle);
+//					Bundle locbundle = new Bundle();
+//					bundle.putParcelable("com.util.Room", room);
+//					bundle.putParcelable("com.orient.setRouteOverlay", gettogetherOverlay);
+//					backIntent.putExtras(locbundle);
 			        startActivity(backIntent);
 			        finish();
 				}else if (status.equalsIgnoreCase("failed")){

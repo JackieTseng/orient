@@ -24,7 +24,6 @@ import android.view.ViewGroup;
 import com.orient.R;
 
 public class LeftFragment extends Fragment {
-
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.left, null);

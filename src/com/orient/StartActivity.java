@@ -35,16 +35,25 @@ public class StartActivity extends Activity{
     private final Handler mHandler = new Handler(){
 		@Override
 		public void handleMessage(Message msg){
+			gva = (GlobalVarApplication)getApplication();
 			Bundle bundle = msg.getData();
 			String status = bundle.getString("status", "no status");
 			String info = bundle.getString("info", "no info");
 			String roomid = bundle.getString("RoomId", "no room id");
 			String teamid = bundle.getString("TeamId", "no team id");
+			String nickname = bundle.getString("nickname", "no nickname");
+			String gender = bundle.getString("gender", "no gender");
+			String telephone = bundle.getString("telephone", "no telephone");
+			int portrait = Integer.valueOf(bundle.getString("portrait", "0"));
 			switch(msg.what){
 			case Constant.NETWORK_SUCCESS_MESSAGE_TAG: 
 				if (status.equalsIgnoreCase("succeed")){
 					Toast.makeText(context, "登录成功", 
 							Toast.LENGTH_SHORT).show();
+					gva.nickname = nickname;
+					gva.gender = gender;
+					gva.telephone = telephone;
+					gva.portrait = portrait;
 					if (info.equalsIgnoreCase("ok")){
 						Intent intent = new Intent();
 						intent.setClass(StartActivity.this, HomeActivity.class);
@@ -62,6 +71,7 @@ public class StartActivity extends Activity{
 						intent.putExtra("RoomId", room_id_num);
 						intent.setClass(StartActivity.this, RoomNew.class);
 						startActivity(intent);
+						finish();
 					}else if (info.equalsIgnoreCase("in game")){
 						Toast.makeText(context, "正在游戏中", 
 								Toast.LENGTH_SHORT).show();

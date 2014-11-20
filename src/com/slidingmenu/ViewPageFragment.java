@@ -17,6 +17,7 @@ package com.slidingmenu;
 
 import java.util.ArrayList;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -27,7 +28,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.constant.Constant;
+import com.orient.GlobalVarApplication;
 import com.orient.R;
 import com.orient.HomeActivity;
 
@@ -37,7 +41,8 @@ public class ViewPageFragment extends Fragment {
 	private MyAdapter mAdapter;
 	private ViewPager mPager;
 	private ArrayList<Fragment> pagerItemList = new ArrayList<Fragment>();
-
+	private TextView nicknameTextView;
+	GlobalVarApplication gva;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View mView = inflater.inflate(R.layout.view_pager, null);
@@ -47,6 +52,12 @@ public class ViewPageFragment extends Fragment {
 		//PageFragment2 page2 = new PageFragment2();
 		pagerItemList.add(page1);
 		//pagerItemList.add(page2);
+		
+		nicknameTextView = (TextView)mView.findViewById(R.id.user);
+		gva = (GlobalVarApplication)this.getActivity().getApplication();
+		String nicknameString = gva.nickname;
+		nicknameTextView.setText(nicknameString);
+		
 		mAdapter = new MyAdapter(getFragmentManager());
 		mPager.setAdapter(mAdapter);
 		mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -61,8 +72,7 @@ public class ViewPageFragment extends Fragment {
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				
-
+			
 			}
 
 			@Override

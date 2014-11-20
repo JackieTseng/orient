@@ -95,7 +95,7 @@ public class HomeActivity extends FragmentActivity {
         }
         else{
             finish();
-            System.exit(0);
+            System.exit(1);
             }
 
         return true;
