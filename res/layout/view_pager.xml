@@ -51,6 +51,8 @@
                 android:layout_toRightOf="@+id/imageView1"
                 android:text="广州大学城中山大学"
                 android:textColor="#76ad35"
+                android:singleLine="true"
+                android:maxEms="10"
                 android:textSize="12sp" />
 
         </RelativeLayout> 

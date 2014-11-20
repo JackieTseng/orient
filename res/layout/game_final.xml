@@ -14,7 +14,6 @@
             android:id="@+id/game_final_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/misson_select_1"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="维多利亚的宵夜"
