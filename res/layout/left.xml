@@ -157,6 +157,43 @@
                 android:textSize="15sp"
                 android:layout_toRightOf="@+id/setting_pic" />
         </RelativeLayout>
+         
+        <include
+            android:id="@+id/line4"
+            android:layout_below="@+id/setting"
+            android:layout_centerHorizontal="true"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            layout="@layout/line" >
+        </include>
+        
+        <RelativeLayout 
+            android:id="@+id/exit"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:padding="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/line4">
+            
+            <ImageView
+                android:id="@+id/exit_pic"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/exit"
+                android:contentDescription="@string/app_name" />
+
+            <Button
+                android:id="@+id/exit_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="#00000000"
+                android:text="Exit 注销"
+                android:textColor="#76ad35"
+                android:textSize="15sp"
+                android:layout_toRightOf="@+id/exit_pic" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

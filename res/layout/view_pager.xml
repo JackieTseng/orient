@@ -49,10 +49,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/imageView1"
-                android:text="广州大学城中山大学"
+                android:text="获取当前地址..."
                 android:textColor="#76ad35"
-                android:singleLine="true"
-                android:maxEms="10"
                 android:textSize="12sp" />
 
         </RelativeLayout> 

@@ -63,7 +63,7 @@
 			        android:layout_marginTop="10dp"
 			        android:layout_width="fill_parent"
 			        android:layout_height="wrap_content"
-			        android:background="#00bb33"
+			        android:background="#6aa71b"
 			        android:textColor="#fff"
 			        android:text="新建队伍" />
 			
@@ -72,9 +72,9 @@
 			        android:layout_marginTop="10dp"
 			        android:layout_width="fill_parent"
 			        android:layout_height="wrap_content"
-			        android:background="#00bb33"
+			        android:background="#6aa71b"
 			        android:textColor="#fff"
-			        android:text="准备" />
+			        android:text="体验模式" />
 	        </LinearLayout>
 	        
             <LinearLayout

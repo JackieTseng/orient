@@ -15,17 +15,15 @@ import android.os.Handler;
 
 public class Logout extends BaseNetwork {
 	String userName;
-	public Logout(HttpClient pClient, Handler pHandler, String pUserName) {
+	public Logout(HttpClient pClient, Handler pHandler) {
 		super(pClient, pHandler, "logout");
 		// TODO Auto-generated constructor stub
-		userName = pUserName;
 		setParamsList();
 	}
 
 	@Override
 	void setParamsList() {
 		// TODO Auto-generated method stub
-		paramsList.add(new BasicNameValuePair("username", userName));
 	}
 
 	@Override
@@ -43,7 +41,12 @@ public class Logout extends BaseNetwork {
 				String tag = parser.getName();
 				if (tag.equalsIgnoreCase("status")) {
 					bundle.putString("status", parser.nextText());
+				} else if (tag.equalsIgnoreCase("info")) {
+					bundle.putString("info", parser.nextText());
 				}
+				break;
+			default:
+				break;
 			}
 			parserEvent = parser.next();
 		}

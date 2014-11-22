@@ -55,7 +55,6 @@ public class LoginActivity extends Activity {
 			String info = bundle.getString("info", "no info");
 			String roomid = bundle.getString("RoomId", "no room id");
 			String teamid = bundle.getString("TeamId", "no team id");
-			
 			String nickname = bundle.getString("nickname", "no nickname");
 			String gender = bundle.getString("gender", "no gender");
 			String telephone = bundle.getString("telephone", "no telephone");
@@ -72,8 +71,7 @@ public class LoginActivity extends Activity {
 					gva.telephone = telephone;
 					gva.portrait = portrait;
 					editor.commit();
-					Toast.makeText(context, "登录成功", 
-							Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, "登录成功", Toast.LENGTH_SHORT).show();
 					if (info.equalsIgnoreCase("ok")){
 						
 						Intent intent = new Intent();
@@ -122,6 +120,7 @@ public class LoginActivity extends Activity {
 						Toast.LENGTH_LONG).show();
 				break;
 			default:
+				Log.i("lin", "unknown");
 				break;
 			}
 		

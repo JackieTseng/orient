@@ -4,10 +4,10 @@
     android:layout_height="100dp">
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/username"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView1"
+        android:layout_below="@+id/userphoto"
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:singleLine="true"
@@ -16,7 +16,7 @@
         android:textSize="12sp" />
 
     <ImageView
-        android:id="@+id/imageView1"
+        android:id="@+id/userphoto"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="2dp"

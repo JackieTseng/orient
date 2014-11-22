@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.http.client.HttpClient;
+import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.HttpParams;
 
 import com.baidu.location.LocationClient;
 import com.baidu.mapapi.BMapManager;
@@ -46,6 +49,9 @@ public class GlobalVarApplication extends Application{
 	public void onCreate() {
 		context = this;
 		httpClient = new DefaultHttpClient();
+	    ClientConnectionManager mgr = httpClient.getConnectionManager();
+	    HttpParams params = httpClient.getParams();
+	    httpClient = new DefaultHttpClient(new ThreadSafeClientConnManager(params,mgr.getSchemeRegistry()), params);
 		msi = new MySearchListener();
 		mBMapMan = new BMapManager(getApplicationContext());
 		mBMapMan.init("Kbe7fy7M05PhdOboeeRkkibv", null);
@@ -54,7 +60,7 @@ public class GlobalVarApplication extends Application{
 		mlc.setAK("90ehkP9tBULpKYG8rbwXffjG");
 		super.onCreate();
 	}
-	
+
 	public MySearchListener getMKSearchListener(){
 		return msi;
 	}

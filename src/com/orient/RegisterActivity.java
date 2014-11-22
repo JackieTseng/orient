@@ -53,13 +53,13 @@ public class RegisterActivity extends Activity {
 	private final Context context = this;
 	private ProgressDialog dialog;
 	AlertDialog imgChooseDialog;
-	
-	private int[] images = { R.drawable.photo1, R.drawable.photo2,
-            R.drawable.photo3, R.drawable.photo4, R.drawable.photo5,
-            R.drawable.photo6, R.drawable.photo7, R.drawable.photo8,
+	GlobalVarApplication gva;
+	private int[] images = { R.drawable.head, R.drawable.head2,
+            R.drawable.head3, R.drawable.head4, R.drawable.head5,
+            R.drawable.head6, R.drawable.head7, R.drawable.head8,
             };
 	GridView grid;
-	private int select = 1;
+	private int select = 0;
 	private final Handler mHandler = new Handler(){
 		@Override
 		public void handleMessage(Message msg){
@@ -106,7 +106,7 @@ public class RegisterActivity extends Activity {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-        
+        gva = (GlobalVarApplication)getApplication();
         dialog = new ProgressDialog(context);
         //设置进度条风格，风格为圆形，旋转的
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -177,6 +177,7 @@ public class RegisterActivity extends Activity {
                 select = position;
                 imgChooseDialog.dismiss();
                 avatarButton.setImageDrawable(getResources().getDrawable(images[select]));
+                gva.portrait = select;
             }
         });
         
@@ -211,7 +212,7 @@ public class RegisterActivity extends Activity {
 					return;
 				}
 				GlobalVarApplication gva = (GlobalVarApplication)getApplication();
-				Register register = new Register(gva.httpClient, mHandler, userName, pw, nickName, phoneNumber, gender);
+				Register register = new Register(gva.httpClient, mHandler, userName, pw, nickName, phoneNumber, gender, select);
 				new Thread(register).start();
 				//显示进度条对话框
 				dialog.show();

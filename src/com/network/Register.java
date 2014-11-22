@@ -13,14 +13,16 @@ import android.os.Handler;
 
 public class Register extends BaseNetwork{
 	String userName, pw, nickName, phoneNumber, gender;
+	int portrait;
 	public Register(HttpClient pClient, Handler pHandler, String pUserName, 
-			String pPassWord, String pNickName, String pPhoneNumber, String pGender) {
+			String pPassWord, String pNickName, String pPhoneNumber, String pGender, int pPortrait) {
 		super(pClient, pHandler, "register");
 		userName = pUserName;
 		pw = pPassWord;
 		nickName = pNickName;
 		phoneNumber = pPhoneNumber;
 		gender = pGender;
+		portrait = pPortrait;
 		setParamsList();
 	}
 	@Override
@@ -30,7 +32,7 @@ public class Register extends BaseNetwork{
         paramsList.add(new BasicNameValuePair("nickname", nickName));
         paramsList.add(new BasicNameValuePair("phone", phoneNumber));
         paramsList.add(new BasicNameValuePair("gender", gender));
-        paramsList.add(new BasicNameValuePair("portrait", "1"));
+        paramsList.add(new BasicNameValuePair("portrait", String.valueOf(portrait)));
 	}
 	@Override
 	protected Bundle parseXML(String stream) throws XmlPullParserException,

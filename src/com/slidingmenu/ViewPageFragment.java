@@ -27,13 +27,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.constant.Constant;
 import com.orient.GlobalVarApplication;
 import com.orient.R;
 import com.orient.HomeActivity;
+import com.util.Portrait;
 
 public class ViewPageFragment extends Fragment {
 
@@ -42,6 +45,7 @@ public class ViewPageFragment extends Fragment {
 	private ViewPager mPager;
 	private ArrayList<Fragment> pagerItemList = new ArrayList<Fragment>();
 	private TextView nicknameTextView;
+	private ImageView head;
 	GlobalVarApplication gva;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -52,12 +56,13 @@ public class ViewPageFragment extends Fragment {
 		//PageFragment2 page2 = new PageFragment2();
 		pagerItemList.add(page1);
 		//pagerItemList.add(page2);
-		
-		nicknameTextView = (TextView)mView.findViewById(R.id.user);
 		gva = (GlobalVarApplication)this.getActivity().getApplication();
+		nicknameTextView = (TextView)mView.findViewById(R.id.user);
 		String nicknameString = gva.nickname;
 		nicknameTextView.setText(nicknameString);
-		
+		head = (ImageView)mView.findViewById(R.id.head);
+		Portrait p = new Portrait();
+		head.setImageResource(p.getPortraitResource(gva.portrait));
 		mAdapter = new MyAdapter(getFragmentManager());
 		mPager.setAdapter(mAdapter);
 		mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

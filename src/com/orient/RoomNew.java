@@ -17,6 +17,7 @@ import com.network.GetRoomInfo;
 import com.network.GetRoute;
 import com.util.ParsePointList;
 import com.util.ParseRoomList;
+import com.util.Portrait;
 import com.util.Room;
 import com.util.TeamMemberParcelable;
 import com.util.TeamParcelable;
@@ -90,10 +91,12 @@ public class RoomNew extends Activity {
 	List<TeamParcelable> teamList;
 	Intent intent;
 	private int newTeamId;
+	private Portrait portrait;
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		intent = getIntent();
+		portrait = new Portrait();
         init();
         enterRoom();       	
     }
@@ -149,13 +152,12 @@ public class RoomNew extends Activity {
 		otherTeams = new ArrayList<TeamParcelable>();
 		isEditTeamName = false;
 		imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+		Log.i("yuan", "roomid ---> " + gva.curRoomId);
      
 	}
 	private boolean enterRoom(){
 		dialog.setMessage("正在获取房间信息...");
-		
-        Log.i("cab","enterroom  gva curroomid-->"+gva.curRoomId);
-        Log.i("cab","intent roomid--->"+intent.getIntExtra("RoomId",-1));
+		dialog.show();
 		if (gva.curRoomId == -1){ //加入新房间
 			int newroomid = intent.getIntExtra("RoomId",-1);
 			GetRoomInfo gri = new GetRoomInfo(gva.httpClient, getRoomInfoHandler,newroomid);
@@ -234,7 +236,7 @@ public class RoomNew extends Activity {
        		exitRoomBtn.setBackgroundColor(Color.rgb(253, 82, 73));
        	}else {
        		exitRoomBtn.setText("加入房间");
-       		exitRoomBtn.setBackgroundColor(Color.rgb(0, 187, 51));
+       		exitRoomBtn.setBackgroundColor(Color.rgb(106, 167, 27));
        	}
        	exitRoomBtn.setOnClickListener(new OnClickListener() {
 			
@@ -598,13 +600,13 @@ public class RoomNew extends Activity {
 		ArrayList<TeamMemberParcelable> myteam_mems = (ArrayList<TeamMemberParcelable>) myteam.getTeamMemberList();
 		for (int i = 0; i < myteam_mems.size(); i++){
 			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("MemImage", myteam_mems.get(i).getAvatar());
+			map.put("MemImage", portrait.getPortraitResource(myteam_mems.get(i).getPortrait()));
 			map.put("Name", myteam_mems.get(i).getName());
 			memItem.add(map);
 		}
 		SimpleAdapter adapter = new SimpleAdapter(this, memItem, R.layout.team_member_item,
 				new String[]{"MemImage", "Name"},
-				new int[]{R.id.imageView1, R.id.textView1});
+				new int[]{R.id.userphoto, R.id.username});
 		myteam_gv.setAdapter(adapter);
 	}
 	private void updateNotChosen(){
@@ -612,13 +614,14 @@ public class RoomNew extends Activity {
 		ArrayList<TeamMemberParcelable> team_mems = (ArrayList<TeamMemberParcelable>) notchosen.getTeamMemberList();
 		for (int i = 0; i < team_mems.size(); i++){
 			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("MemImage", team_mems.get(i).getAvatar());
+			map.put("MemImage", portrait.getPortraitResource(team_mems.get(i).getPortrait()));
+			Log.i("yuan", "portrait ---> " + team_mems.get(i).getPortrait());
 			map.put("Name", team_mems.get(i).getName());
 			memItem.add(map);
 		}
 		SimpleAdapter adapter = new SimpleAdapter(this, memItem, R.layout.team_member_item,
 				new String[]{"MemImage", "Name"},
-				new int[]{R.id.imageView1, R.id.textView1});
+				new int[]{R.id.userphoto, R.id.username});
 		notchosen_gv.setAdapter(adapter);
 	}
 	private void updateOtherTeam(){
@@ -669,13 +672,13 @@ public class RoomNew extends Activity {
 			ArrayList<HashMap<String, Object>> memItem = new ArrayList<HashMap<String, Object>>();
 			for (int i = 0; i < pMembers.size(); i++){
 				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("MemImage", pMembers.get(i).getAvatar());
+				map.put("MemImage", portrait.getPortraitResource(pMembers.get(i).getPortrait()));
 				map.put("Name", pMembers.get(i).getName());
 				memItem.add(map);
 			}
 			SimpleAdapter adapter = new SimpleAdapter(RoomNew.this, memItem, R.layout.team_member_item,
 					new String[]{"MemImage", "Name"},
-					new int[]{R.id.imageView1, R.id.textView1});
+					new int[]{R.id.userphoto, R.id.username});
 			gv.setAdapter(adapter);
 			newTeamId = newteamid;
 			joinTeam_im.setOnClickListener(new OnClickListener() {

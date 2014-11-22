@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -132,12 +133,10 @@ public class GetRoomInfo extends BaseNetwork{
 															switch(parseEvent){
 															case XmlPullParser.START_TAG:
 																tag = parser.getName();
-																System.out.println("tag in member: "+tag);
 																if (tag.equalsIgnoreCase("userid"))
 																	member.setUserid(safeNextText(parser));
 																else if (tag.equalsIgnoreCase("username")) {
 																	member.setName(safeNextText(parser));
-																	Log.i("yuan", "username ooo ====");
 																}
 																else if (tag.equalsIgnoreCase("latitude"))
 																	location.setLatitude(Integer.parseInt(safeNextText(parser)));
@@ -145,6 +144,8 @@ public class GetRoomInfo extends BaseNetwork{
 																	location.setLongitude(Integer.parseInt(safeNextText(parser)));
 																else if (tag.equalsIgnoreCase("ready"))
 																	member.setReady(safeNextText(parser));
+																else if (tag.equalsIgnoreCase("portrait"))
+																	member.setPortrait(Integer.valueOf(safeNextText(parser)));
 																break;
 															}
 															parseEvent = parser.next();

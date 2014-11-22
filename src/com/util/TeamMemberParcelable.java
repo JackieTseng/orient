@@ -9,13 +9,13 @@ public class TeamMemberParcelable implements Parcelable{
 	private String name;
 	private com.util.Location location;
 	private String ready;
-	private int avatar;
+	private int portrait;
 	public TeamMemberParcelable(){
 		this(null,0);
 	}
-	public TeamMemberParcelable(String pUserName, int pAvatar){
+	public TeamMemberParcelable(String pUserName, int pPortrait){
 		location = new Location();
-		avatar = pAvatar;
+		portrait = pPortrait;
 		location = new Location();
 	}
 	public TeamMemberParcelable(String pUserName){
@@ -30,7 +30,7 @@ public class TeamMemberParcelable implements Parcelable{
 		dest.writeString(userid);
 		dest.writeString(name);
 		dest.writeString(ready);
-		dest.writeInt(avatar);
+		dest.writeInt(portrait);
 		if (location != null){
 			dest.writeInt(location.getLongitude());
 			dest.writeInt(location.getLatitude());
@@ -45,7 +45,7 @@ public class TeamMemberParcelable implements Parcelable{
 			member.userid = source.readString();
 			member.name = source.readString();
 			member.ready = source.readString();
-			member.avatar = source.readInt();
+			member.portrait = source.readInt();
 			member.location.setLongitude(source.readInt());
 			member.location.setLatitude(source.readInt());
 
@@ -80,11 +80,11 @@ public class TeamMemberParcelable implements Parcelable{
 	public void setLocation(com.util.Location location) {
 		this.location = location;
 	}
-	public int getAvatar() {
-		return avatar;
+	public int getPortrait() {
+		return portrait;
 	}
-	public void setAvatar(int avatar) {
-		this.avatar = avatar;
+	public void setPortrait(int portrait) {
+		this.portrait = portrait;
 	}
 	
 }

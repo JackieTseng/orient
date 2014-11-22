@@ -79,7 +79,8 @@ public class PageFragment1 extends Fragment {
         refreshableView.setOnRefreshListener(new PullToRefreshListener() {  
             @Override  
             public void onRefresh() {
-                location.positioning(getActivity(), positioningHandler, gva.getMyLocationListener(), false);
+            	GetRoomList g = new GetRoomList(gva.httpClient, getRoomListHandler);
+                new Thread(g).start();
                 try {  
                     Thread.sleep(5000);  
                 } catch (InterruptedException e) {  
