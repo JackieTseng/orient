@@ -331,16 +331,6 @@ public class FriendActivity extends ListActivity implements OnTouchListener {
 						}
 					});
     				
-    				((Button)view.findViewById(R.id.prompt_confirm)).setOnClickListener(new View.OnClickListener() {	
-						@Override
-						public void onClick(View v) {
-							//跳到一个房间
-							Intent intent = new Intent();
-							intent.setClass(FriendActivity.this, GameTeamActivity.class);
-							startActivity(intent);
-							finish();
-						}
-					});
                 }                
             }
 	
