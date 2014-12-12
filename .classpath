@@ -8,7 +8,7 @@
 	<classpathentry kind="lib" path="libs/baidumapapi_v2_3_1.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry kind="lib" path="/home/jackie/workspace/Orient/libs/httpmime-4.1.2.jar"/>
-	<classpathentry kind="lib" path="/home/jackie/workspace/Orient/libs/o2omobi_sdk_v2.3.4.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/Orient/libs/httpmime-4.1.2.jar"/>
+	<classpathentry kind="lib" path="E:/workspace/Orient/libs/o2omobi_sdk_v2.3.4.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

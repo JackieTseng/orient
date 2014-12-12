@@ -220,20 +220,6 @@ public class GameMap extends Activity implements Runnable{
 			}
 		});
 		
-		memberButton = (Button)findViewById(R.id.game_member);
-		memberButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				Intent intent = new Intent();
-				intent.putExtra("roomName", roomNameString);
-				intent.putExtra("Routeid", routeid);
-				intent.setClass(GameMap.this, GameTeamActivity.class);
-				startActivity(intent);
-				//finish();
-			}
-		});
 		
 		//设置计时
 		timeView = (TextView) findViewById(R.id.timeView);
